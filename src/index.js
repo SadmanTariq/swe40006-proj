@@ -5,12 +5,14 @@ const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(morgan('combined', {  // Logs HTTP requests to /var/log/server-access.log
-	stream: fs.createWriteStream(
-		"/var/log/server-access.log",
-		{ flags: 'a' }
-	)
-}));
+if (process.env.NODE_ENV !== 'test') {
+	app.use(morgan('combined', {  // Logs HTTP requests to /var/log/server-access.log
+		stream: fs.createWriteStream(
+			"/var/log/server-access.log",
+			{ flags: 'a' }
+		)
+	}));
+}
 
 app.use(express.static('public'));
 
