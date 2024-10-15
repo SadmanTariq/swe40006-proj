@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +25,7 @@ jobs:
       run: npm test
 
   deploy:
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
     if: success()
 
