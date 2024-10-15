@@ -44,5 +44,5 @@ jobs:
           cd /home/ec2-user/swe40006-proj
           git pull origin master
           npm install
-          pm2 restart app
+          sudo pm2 restart app
         EOF
