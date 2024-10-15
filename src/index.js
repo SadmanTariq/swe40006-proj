@@ -4,7 +4,13 @@ const morgan = require('morgan');
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(morgan('combined'));  // Logs HTTP requests
+app.use(morgan('combined'), {  // Logs HTTP requests to /var/log/server-access.log
+	stream: fs.createWriteStream(
+		"/var/log/server-access.log",
+		{ flags: 'a' }
+	)
+});
+
 app.use(express.static('public'));
 
 app.get('/api/add/:a/:b', (req, res) => {
