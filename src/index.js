@@ -1,8 +1,10 @@
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
+app.use(morgan('combined'));  // Logs HTTP requests
 app.use(express.static('public'));
 
 app.get('/api/add/:a/:b', (req, res) => {
